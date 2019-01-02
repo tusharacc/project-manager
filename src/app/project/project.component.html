@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-12 box">
+        <app-add-project (projectAdded)="refreshProjectList($event)" #appAddProject></app-add-project>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-12 h-25">
+        <app-project-utility (doSort)="sortTheList($event)"></app-project-utility>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <app-view-project (updateTaskEvent)="updateTask($event)" #appViewProject></app-view-project>
+    </div>
+</div>

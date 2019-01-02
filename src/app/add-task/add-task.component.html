@@ -1,0 +1,117 @@
+<form #f="ngForm" novalidate>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Project</label>
+      <div class="col-sm-8">
+        <input 
+          type="text" 
+          class="form-control"
+          placeholder="search project name..."
+          [value]="projectList"
+          [ngbTypeahead]="search"
+          [ngModel]="projectName"
+          [ngClass]="{'is-valid':projectNameIsValid,'is-invalid':projectNameIsInvalid}"
+          name="projectName">
+         <!--  list="projects"  >
+          <datalist id="projects">
+            <option value="{{val.projectName}}" class="form-control" *ngFor="let val of projectsList">
+          </datalist> -->
+      </div>
+      <button class="col-sm-2 btn btn-secondary" type="button" (click)="seacrhProject(f)">Search</button>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Task:</label>
+      <div class="col-sm-10">
+        <input 
+          type="text" 
+          class="form-control"  
+          placeholder="Enter Task Name..."
+          [ngModel]="taskName"
+          [ngClass]="{'is-valid':taskNameIsValid,'is-invalid':taskNameIsInvalid}"
+          name="taskName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" (change)="onCheckboxChange($event)" name="chkboxParentTask" [ngModel]="chkboxParentTask">
+          <label class="form-check-label">
+            Parent Task
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="priority" class="col-sm-2 col-form-label">Priority</label>
+        <div class="col-sm-10">
+          <input 
+            type="range" 
+            class="form-control-range" 
+            min="0" 
+            max="30" 
+            value="15" 
+            [ngModel]="priority" 
+            [disabled]="disabled"
+            name="priority">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Parent Task</label>
+        <div class="col-sm-8">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="parent task..."
+            [ngModel]="parentTask"
+            name="parentTask"
+            [ngClass]="{'is-valid':parentTaskIsValid,'is-invalid':parentTaskIsInvalid}"
+            [disabled]="disabled"  >
+        </div>
+        <button class="col-sm-2 btn btn-secondary" type="button" [disabled]="disabled">Search</button>
+      </div>
+      <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Start Date: </label>
+          <input
+            type="date" 
+            name="startDate" 
+            class="form-control w-50 col-sm-4" 
+            [ngModel]="startDate | date:'yyyy-MM-dd'"
+            [disabled]="disabled"
+            [ngClass]="{'is-valid':startDateIsValid,'is-invalid':startDateIsInvalid}"
+            name="startDate">
+          <label class="col-sm-2 col-form-label">End Date: </label>
+          <input 
+            type="date" 
+            style="margin-left:0.5rem;" 
+            class="form-control w-50 col-sm-3" 
+            name="endDate" 
+            [ngClass]="{'is-valid':endDateIsValid,'is-invalid':endDateIsInvalid}"
+            [ngModel]="endDate | date:'yyyy-MM-dd'"
+            [disabled]="disabled"
+            name="endDate">
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">User:</label>
+        <div class="col-sm-8">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="User Name..."
+            name="userName"
+            [value]="userList"
+            [ngModel]='userName'
+            [ngClass]="{'is-valid':userNameIsValid,'is-invalid':userNameIsInvalid}"
+            [ngbTypeahead]="getUserName"  >
+        </div>
+        <button class="col-sm-2 btn btn-secondary" type="button" (click)="searchName(f)">Search</button>
+      </div>
+      <div class="form-group row" style="margin-right:2rem;">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-primary float-right" (click)="resetForm(f)" >Reset</button>
+          <button type="button" class="btn btn-primary float-right" (click)="addTask()" >Add</button>
+        </div>
+      </div>
+  </form>
+  <div class="alert alert-dismissible fade show" [ngClass]="{'alert-success':success,'alert-warning':error}" role="alert" *ngIf="success; else error" >
+    <strong>{{message}}</strong>
+  </div>

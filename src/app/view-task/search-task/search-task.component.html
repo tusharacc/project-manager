@@ -1,0 +1,34 @@
+<div class="row">
+  <label class="col-sm-2">Project: </label>
+  <div class="col-sm-4">
+    <div class="input-group mb-3">
+      <input #projectNameInp
+        type="text" 
+        class="form-control" 
+        placeholder="Search Project Name" 
+        aria-label="Project Name" 
+        aria-describedby="button-addon2"
+        [value]="projectList"
+        [ngbTypeahead]="search"
+        [ngModel]="projectName">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="fetchTasks(projectNameInp.value)">Search</button>
+      </div>
+    </div>   
+  </div>
+  
+  <div class="col-sm-2">
+    <label >SORT:</label>
+  </div>
+  <div class="col-xs-4">
+      <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary" (click)="sortData('SD')">Start Date</button>
+          <button type="button" class="btn btn-secondary" (click)="sortData('ED')">End Date</button>
+          <button type="button" class="btn btn-secondary" (click)="sortData('PR')">Priority</button>
+          <button type="button" class="btn btn-secondary" (click)="sortData('CP')">Completed</button>
+        </div>
+  </div>
+</div>
+  
+  
+  

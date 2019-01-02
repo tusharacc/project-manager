@@ -1,0 +1,60 @@
+<div *ngFor="let val of projects;let even=even; let odd = odd" [ngClass]="{'odd':odd,'even':even}">
+  <form style="font-size:0.7rem">
+      <div class="row">
+        <div class="col-8">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Project</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="{{val.projectName}}" disabled>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">No of Tasks</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" value="{{val.numberOfTasks}}" disabled>
+                </div>
+                <label class="col-sm-2 col-form-label">Completed</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" value="{{val.completedTasks}}" disabled>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Start Date</label>
+                <div class="input-group col-sm-4">
+                    <input class="form-control" placeholder="yyyy-MM-dd"
+                            name="dp"  ngbDatepicker #d="ngbDatepicker" value="{{val.startDate | date:'yyyy-MM-dd' }}" disabled>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button" disabled></button>
+                    </div>
+                </div>
+                <label class="col-sm-2 col-form-label">End Date</label>
+                <div class="input-group col-sm-4">
+                    <input class="form-control" placeholder="yyyy-MM-dd"
+                            name="dp"  ngbDatepicker #d="ngbDatepicker" value="{{val.endDate | date:'yyyy-MM-dd' }}" disabled>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button" disabled></button>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-2 w-75 text-center">
+            <div class="row text-center" style="font-size:0.7rem;margin-top:15%;">
+              Priority
+            </div>
+            <div class="row" style="font-size:0.7rem;margin:auto;margin-top:15%;">
+                <input type="text" class="form-control" value="{{val.priority}}" disabled>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="row">
+              <button type="button" class="btn btn-secondary w-100" style="font-size:0.7rem;margin-top:15%;" (click)="updateTask(val)">Update</button>
+            </div>
+            <div class="row">
+              <button type="button" class="btn btn-secondary w-100" style="font-size:0.7rem;margin:auto;margin-top:15%;" (click)="suspendTask(val.id)">Suspend</button>
+            </div>
+          </div>
+      </div>
+      
+    </form>
+
+</div>

@@ -1,0 +1,87 @@
+
+<form #f="ngForm">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Project</label>
+    <div class="col-sm-10">
+      <input 
+        type="text" 
+        class="form-control"  
+        placeholder="Project Name" 
+        [ngModel]="projectName"  
+        name="projectName" >
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label">
+          Set Start and End Date
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group row">
+        <div class="input-group col-sm-6">
+          <input 
+            class="form-control" 
+            placeholder="yyyy-mm-dd"
+            name="dp" 
+            [(ngModel)]="startDate" 
+            ngbDatepicker 
+            #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+        <div class="input-group col-sm-6">
+            <input 
+              class="form-control" 
+              placeholder="yyyy-mm-dd"
+              name="dp" 
+              [(ngModel)]="endDate" 
+              ngbDatepicker 
+              #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+      </div>
+      <!-- <input type="date" name="startDate" class="form-control w-50" [ngModel]="startDate | date:'yyyy-MM-dd'"> -->
+      <!-- <input type="date" style="margin-left:0.5rem;" class="form-control w-50" name="endDate" [ngModel]="endDate | date:'yyyy-MM-dd'"> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="priority" class="col-sm-2 col-form-label">Priority</label>
+    <div class="col-sm-10">
+      <input 
+        type="range" 
+        class="form-control-range" 
+        min="0" 
+        max="30" 
+        value="15" 
+        [ngModel]="priority" 
+        name="priority">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Manager</label>
+    <div class="col-sm-10">
+      <select 
+        class="form-control" 
+        [ngModel]="employeeName" 
+        name="managerName" 
+        required>
+        <option [ngValue]="val.employeeId" *ngFor="let val of managerName">{{val.firstName + val.lastName}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row" style="margin-right:2rem;">
+    <div class="col-sm-10">
+      <button type="button" class="btn btn-secondary" (click)="addProject(f)" style="margin-left:75%;" >{{buttonText}}</button>
+      <button type="button" class="btn btn-secondary" style="margin-left:0.5rem;">Reset</button>
+    </div>
+  </div>
+</form>

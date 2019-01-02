@@ -1,0 +1,37 @@
+<div class="form-group row" *ngFor="let user of users" (triggerSort)="sortTheData(val)">
+  <div class="col-10 pull-left">
+    <div class="col-12" style="margin-bottom:0.2rem">
+        <input #firstName 
+        type="text" 
+        class="form-control" 
+        value="{{user.firstName}}" 
+        [disabled]="!user.edit" 
+        (blur)="updatedData(user._id,firstName.value,'FN')">
+    </div> 
+    <div class="col-12" style="margin-bottom:0.2rem">
+        <input #lastName 
+        type="text" 
+        class="form-control" 
+        value="{{user.lastName}}" 
+        [disabled]="!user.edit" 
+        (blur)="updatedData(user._id,lastName.value,'LN')">
+    </div> 
+    <div class="col-12" style="margin-bottom:0.2rem">
+        <input #employeeId 
+        type="text" 
+        class="form-control" 
+        value="{{user.employeeId}}" 
+        [disabled]="!user.edit" 
+        (blur)="updatedData(user._id,employeeId.value,'EN')">
+    </div>
+  </div>
+  <div class="col-2 pull-right">
+    <div class="col-sm-12 row" style="margin-bottom:0.2rem;">
+      <button class="w-100" (click)="editUser(user)" >Edit</button>
+    </div>
+    <div class="col-sm-12 row">
+      <button class="w-100" (click)="deleteUser(user)">Delete</button>
+    </div>
+  </div>
+  
+</div>

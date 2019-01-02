@@ -1,0 +1,90 @@
+<div class="container" style="font-size:0.7rem;">
+  <div class="row">
+    <div class="col-sm-2">
+        <h6 class="font-weight-bold">TASK</h6>
+    </div>
+    <div class="col-sm-2">
+        <h6 class="font-weight-bold">PARENT TASK</h6>
+    </div>
+    <div class="col-sm-2">
+        <h6 class="font-weight-bold">PRIORITY</h6>
+    </div>
+    <div class="col-sm-2">
+        <h6 class="font-weight-bold">START</h6>
+    </div>
+    <div class="col-sm-2">
+        <h6 class="font-weight-bold">END</h6>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row" *ngFor="let val of tasks">
+  <div class="input-group mb-1 col-sm-2">
+    <input  #taskName
+      type="text" 
+      class="form-control" 
+      placeholder="" 
+      aria-label="" 
+      value="{{ val.taskName }}" 
+      [disabled]="!val.edit" 
+      style="font-size:0.7rem;"  
+      (blur)="updatedData(val.id,taskName.value,'TN')" >
+  </div>
+  <div class="input-group mb-1 col-sm-2">
+    <input #parentTask 
+      type="text" 
+      class="form-control" 
+      placeholder="" 
+      aria-label="" 
+      value="{{ val.parentTask }}" 
+      [disabled]="!val.edit" 
+      style="font-size:0.7rem;"
+      (blur)="updatedData(val.id,parentTask.value,'PN')"  >
+  </div>
+  <div class="input-group mb-1 col-sm-2">
+    <input #priority 
+      type="text" 
+      class="form-control" 
+      placeholder="" 
+      aria-label="" 
+      value="{{ val.priority }}" 
+      [disabled]="!val.edit" 
+      style="font-size:0.7rem;"
+      (blur)="updatedData(val.id,priority.value,'PR')" >
+  </div>
+  <div class="input-group mb-1 col-sm-2">
+    <input #startDate 
+      type="date" 
+      class="form-control" 
+      placeholder="" 
+      aria-label="" 
+      value="{{ val.startDate | date:'yyyy-MM-dd' }}" 
+      [disabled]="!val.edit"  
+      style="font-size:0.7rem;"
+      (blur)="updatedData(val.id,startDate.value,'SD')" >
+  </div>
+  <div class="input-group mb-1 col-sm-2">
+    <input  #endDate
+      type="date" 
+      class="form-control" 
+      placeholder="" 
+      aria-label="" 
+      value="{{ val.endDate | date:'yyyy-MM-dd' }}" 
+      [disabled]="!val.edit" style="font-size:0.7rem;" 
+      (blur)="updatedData(val.id,endDate.value,'ED')">
+  </div>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" (click)="editTask(val)" class="btn btn-secondary" [disabled]="val['completed']">Edit</button>
+    <button type="button" (click)="completeTask(val)" class="btn btn-secondary" [disabled]="val['completed']">Complete</button>
+  </div>
+   <!-- <div class="col-sm-1">
+      <button (click)="editTask(val)" class="btn btn-info h-75 font-size">Edit</button>
+    </div>
+    <div class="col-sm-1">
+      <button (click)="completeTask(val)" class="btn btn-info h-75 font-size" [disabled]="val['complete']==true" >Complete</button>
+    </div>  -->               
+  </div>
+</div>
+<div class="alert alert-dismissible fade show" [ngClass]="{'alert-success':success,'alert-warning':error}" role="alert" *ngIf="success; else error" >
+  <strong>{{message}}</strong>
+</div>
