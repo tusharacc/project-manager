@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,ViewChild,Output,EventEmitter, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { DataService } from 'src/app/data.service';
@@ -20,7 +20,7 @@ export class AddProjectComponent implements OnInit {
   employeeName:string;
   managerName: Array<{}>;
   projectDetails: Project = new Project();
-  Input() buttonText:string;
+  @Input() buttonText: string;
   
   @Output() projectAdded  = new EventEmitter<any>();
   @ViewChild('f') addProjectForm: NgForm;
@@ -59,8 +59,6 @@ export class AddProjectComponent implements OnInit {
     this.projectName = project.projectName;
     this.priority =  project.priority;
     this.startDate = {'year': stDate.getFullYear(),'month':stDate.getMonth()+1,'day':stDate.getDate() };
-    console.log('End data',{'year': edDate.getFullYear(),'month':edDate.getMonth()+1,'day':edDate.getDate() })
-    console.log('Start data',{'year': stDate.getFullYear(),'month':stDate.getMonth()+1,'day':stDate.getDate() })
     this.endDate = {'year': edDate.getFullYear(),'month':edDate.getMonth()+1,'day':edDate.getDate() };
     console.log('project.managerEmpId',project.managerEmpId)
     this.employeeName = project.managerEmpId;
