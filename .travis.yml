@@ -7,6 +7,12 @@ required: sudo
 services:
 - docker
 
+deploy:
+  provider: heroku
+  api_key:
+    secure: "bac688af-1a37-49b2-bfe1-8846ccd02ce0"
+
+
 before_script:
   - npm install -g @angular/cli
 
