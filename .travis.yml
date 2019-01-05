@@ -9,6 +9,7 @@ services:
 
 deploy:
   provider: heroku
+  app: angular-project-manager
   api_key:
     secure: "bac688af-1a37-49b2-bfe1-8846ccd02ce0"
 
