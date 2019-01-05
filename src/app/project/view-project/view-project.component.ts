@@ -10,7 +10,7 @@ import { Subscription }   from 'rxjs';
 })
 export class ViewProjectComponent implements OnInit {
 
-  projects: Array<{}> = [];
+  projects: Array<{}>;
   subscription: Subscription;
   @Output() updateTaskEvent  = new EventEmitter<Project>();
 
@@ -59,6 +59,7 @@ export class ViewProjectComponent implements OnInit {
   }
 
   getProjects(){
+    this.projects = [];
     this.dataService.projects.forEach((project:Project)=>{
       let task_details = this.dataService.numberOfTasks(project['_id']);
       this.projects.push({'projectName':project.projectName,

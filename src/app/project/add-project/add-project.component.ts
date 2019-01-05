@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
 import { Project } from 'src/app/project';
 import { ViewProjectComponent } from '../view-project/view-project.component';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar,NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-project',
@@ -20,12 +20,13 @@ export class AddProjectComponent implements OnInit {
   employeeName:string;
   managerName: Array<{}>;
   projectDetails: Project = new Project();
+  disable:boolean = true;
   @Input() buttonText: string;
   
   @Output() projectAdded  = new EventEmitter<any>();
   @ViewChild('f') addProjectForm: NgForm;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,private ngbDateParserFormatter: NgbDateParserFormatter) { }
 
   ngOnInit() {
     this.managerName =this.dataService.users;
@@ -36,13 +37,19 @@ export class AddProjectComponent implements OnInit {
   addProject(form:NgForm){
     console.log('Forms',form)
     this.projectDetails.projectName = form['value']['projectName'];
-    this.projectDetails.startDate = form['value']['startDate'];
-    this.projectDetails.endDate = form['value']['endDate'];
+    this.projectDetails.startDate = new Date(this.ngbDateParserFormatter.format(form['value']['startDate']));
+    this.projectDetails.endDate = new Date(this.ngbDateParserFormatter.format(form['value']['endDate']));
     this.projectDetails.priority = form['value']['priority'];
     this.projectDetails.managerEmpId = form['value']['managerName'];
     this.projectDetails.completed = "In Progress"
         
-    this.dataService.addproject(this.projectDetails);
+    this.dataService.addproject(this.projectDetails)
+    .then((data)=>{
+      console.log(data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
     this.addProjectForm.reset();
     
 
@@ -63,6 +70,15 @@ export class AddProjectComponent implements OnInit {
     console.log('project.managerEmpId',project.managerEmpId)
     this.employeeName = project.managerEmpId;
     this.buttonText = 'Update'
+  }
+
+  enableDate(){
+    if (this.disable){
+      this.disable = false;
+    } else {
+      this.disable = true;
+    }
+    
   }
     
 }

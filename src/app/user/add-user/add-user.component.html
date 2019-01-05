@@ -1,10 +1,15 @@
-  <form>
+  <form #f="ngForm" >
       <div class="form-group row">
         <div class="col-2">
             <label for="firstName">First Name</label>
         </div>
         <div class="col-10">
-            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="First Name"
+              [ngModel]="firstName"
+              name="firstName" required>
         </div>  
       </div>
   
@@ -13,7 +18,12 @@
             <label for="lastName">Last Name</label>
         </div>
         <div class="col-10">
-            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Last Name"
+              [ngModel]="lastName"
+              name="lastName" required>
         </div>  
       </div>
   
@@ -22,13 +32,17 @@
             <label for="employeeNo">Employee Id</label>
         </div>
         <div class="col-10">
-            <input type="text" class="form-control" id="employeeNo" placeholder="Employee ID">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Employee ID"
+              [ngModel]="employeeId"
+              name="employeeId" required>
         </div>  
       </div>
-  
       <div class="form-group row float-right">
-          <button type="button" class="btn btn-primary float-left" style="margin-right:0.2rem;">Add</button>
-          <button type="button" class="btn btn-primary float-left" >Reset</button>
+          <button type="button" class="btn btn-primary float-left" style="margin-right:0.2rem;" (click)="addUser(f)">Add</button>
+          <button type="button" class="btn btn-primary float-left" (clikc)='resetForm()'>Reset</button>
       </div>
   </form>    
 

@@ -13,24 +13,29 @@ import { first } from 'rxjs/operators';
 })
 export class DataService {
 
-  baseUrl: string = 'http://localhost:3000/api'
+  baseUrl: string = 'https://whispering-shelf-16302.herokuapp.com/api'
   users:User[];
   projects: Project[];
   tasks:Task[];
   addProjectCall: boolean = false;
   private projectAdded = new Subject<string>();
   private taskAdded = new Subject<string>();
+  private userAdded = new Subject<string>();
 
   projectAddedSuccess$ = this.projectAdded.asObservable();
   taskAddedSuccess$ = this.taskAdded.asObservable();
+  userAddedSuccess$ = this.userAdded.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  getUsers() {
+  getUsers(ind:boolean) {
     let url = this.baseUrl + '/users';
     this.http.get(url).subscribe((data:User[])=> {
       this.users = data['data'];
       console.log(this.users);
+      if (ind){
+        this.userAdded.next(null);
+      }
     });
   }
 
@@ -53,32 +58,19 @@ export class DataService {
     });
   }
 
-  addTask(data:Task,getTask: boolean){
+  async addTask(data:Task,getTask: boolean){
     let url = this.baseUrl + '/tasks/add';
-    this.http.post(url,data).subscribe((data)=> {
-      console.log('Task Added',data);
-    },()=>{},()=>{
-      if (getTask){
-        this.getTasks(true);
-      }
-    });
+    let result = await this.http.post(url,data).toPromise();
+    this.getTasks(true);
+    return result
   }
 
-  addproject(data:Project){
+  async addproject(data:Project){
     let url = this.baseUrl + '/projects/add';
     this.addProjectCall = true
-    console.log('I am add project');
-    this.http.post(url,data).subscribe((data)=> {
-
-      console.log(data);
-    },(err) => {
-      console.log('Error while adding project')
-    },()=>{
-      console.log('I am getting called now');
-      this.getProjects(true)
-      this.addProjectCall = false
-      
-    });
+    let result = await this.http.post(url,data).toPromise();
+    this.getProjects(true)
+    return result;
   }
 
   numberOfTasks(projectId: string){
@@ -143,6 +135,13 @@ export class DataService {
     let result = await this.http.post(url,data).toPromise();
     console.log(result);
     this.getProjects(true);
+    return result;
+  }
+
+  async addUsers(data:User){
+    let url = this.baseUrl + '/users/add';
+    let result = await this.http.post(url,data).toPromise();
+    this.getUsers(true);
     return result;
   }
 }

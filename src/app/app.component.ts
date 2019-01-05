@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'angular-project-manager';
   users: User[]
   constructor (private dataService: DataService){
-    dataService.getUsers();
+    dataService.getUsers(false);
     dataService.getProjects(false);
     dataService.getTasks(false)
   }

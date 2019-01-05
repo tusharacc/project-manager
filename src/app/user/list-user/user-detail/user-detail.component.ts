@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { User } from 'src/app/user';
-
+import { Subscription }   from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
@@ -10,19 +10,28 @@ import { User } from 'src/app/user';
 })
 export class UserDetailComponent implements OnInit {
 
-  users: Array<{}>=[];
+  users: Array<{}>;
   changeData: Array<{}>=[];
-  
+  subscription: Subscription;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) { 
+    this.subscription = dataService.userAddedSuccess$.subscribe(
+      data => {
+        this.getUsers(); 
+        console.log('I am in subscription');
+    });
+  }
 
   ngOnInit() {
-    console.log('type of users',typeof this.dataService.users);
+    this.getUsers();  
+  }
+
+  getUsers(){
+    this.users = [];
     this.dataService.users.forEach((data:User) => {
       console.log('User in init',data)
       this.users.push({'_id':data['_id'],'firstName':data.firstName,'lastName':data.lastName,'employeeId':data.employeeId,'edit':false})
     });
-    console.log('users',this.users);
   }
 
   updatedData(id:string,val:string,ind:string){

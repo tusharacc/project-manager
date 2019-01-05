@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- "node"
+ 
+required: sudo
+
+services:
+- docker
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng build --prod --aot
+  - ng test

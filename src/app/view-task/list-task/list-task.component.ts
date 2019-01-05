@@ -11,7 +11,7 @@ import { Subscription }   from 'rxjs';
 export class ListTaskComponent implements OnInit {
   
   taskLists: Array<Task>;
-  tasks:Array<{}> = [];
+  tasks:Array<{}>;
   changedData:Array<{}>=[];
   success:boolean;
   error:boolean;
@@ -39,6 +39,7 @@ export class ListTaskComponent implements OnInit {
 
   getTasksList(val){
     console.log('Tasks',this.dataService.tasks);
+    this.tasks = [];
     this.dataService.tasks.forEach((data:Task) => {
       console.log('The id of task',data['_id']);
       if (data['projectId'] === this.projectId){
