@@ -22,6 +22,10 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
     this.getUsers();  
   }
