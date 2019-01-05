@@ -9,7 +9,9 @@ import { User } from 'src/app/user';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-
+  firstName:string; //added as build failed in Travis
+  lastName: string;
+  employeeId: string;
   user:User = new User();
   @ViewChild('F') addUserForm:NgForm
 
