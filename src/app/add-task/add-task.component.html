@@ -6,7 +6,6 @@
           type="text" 
           class="form-control"
           placeholder="search project name..."
-          [value]="projectList"
           [ngbTypeahead]="search"
           [ngModel]="projectName"
           [ngClass]="{'is-valid':projectNameIsValid,'is-invalid':projectNameIsInvalid}"
@@ -34,7 +33,7 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" (change)="onCheckboxChange($event)" name="chkboxParentTask" [ngModel]="chkboxParentTask">
+          <input class="form-check-input" type="checkbox" (change)="onCheckboxChange($event)" name="chkboxParentTask" ngModel>
           <label class="form-check-label">
             Parent Task
           </label>

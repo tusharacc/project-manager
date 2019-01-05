@@ -11,6 +11,7 @@ import { Project } from 'src/app/project';
 })
 export class ProjectUtilityComponent implements OnInit {
   projectsList: Array<string>=[];
+  searchText: string;
   @Output() doSort  = new EventEmitter<string>();
   constructor(private dataService: DataService) { }
 

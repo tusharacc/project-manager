@@ -18,7 +18,7 @@ import { Task } from '../task';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-  sucess:boolean;
+  success:boolean;
   error: boolean;
   message: string;
   projectNameIsInvalid:boolean;
@@ -80,7 +80,7 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
-  resetForm(){
+  resetForm(form:NgForm){
     this.addTaskForm.reset();
   }
 
