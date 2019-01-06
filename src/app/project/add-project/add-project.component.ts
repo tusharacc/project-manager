@@ -51,6 +51,7 @@ export class AddProjectComponent implements OnInit {
       console.log(error);
     });
     this.addProjectForm.reset();
+    this.disable = false;
     
 
     //this.projectAdded.emit(null);
